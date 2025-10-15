@@ -1,6 +1,21 @@
 # REST vs GraphQL Practical Example
 
-This document explains the key difference between REST API and GraphQL with a **practical Node.js example**.
+In REST APIs, if we want only **specific user fields**, we often end up creating **multiple endpoints**.  
+
+For example:  
+- If we want only the user’s **email**, **first name**, and **last name**,  
+  we might create:  
+  ```
+  GET /users/:id/basic
+  ```  
+- If we only want to fetch the **user’s profile picture**,  
+  we might create:  
+  ```
+  GET /users/:id/profile
+  ```  
+
+Over time, this leads to **too many endpoints** for different use cases.  
+GraphQL solves this by allowing you to fetch **only the required fields** from a **single endpoint**.
 
 ---
 
@@ -51,7 +66,14 @@ GET /users/1
 ```
 
 ### ❌ Problem
-We only needed **firstName**, **lastName**, and **email**, but the endpoint returned everything (over-fetching).
+We only needed **firstName**, **lastName**, and **email**, but the endpoint returned everything (over-fetching).  
+To get specific data like profile image or basic info, we would have to create **separate endpoints** like:  
+- `/users/:id/basic`  
+- `/users/:id/profile`  
+- `/users/:id/email`  
+...and so on.  
+
+This makes the system **hard to scale** and **complex to maintain**.
 
 ---
 
@@ -129,7 +151,7 @@ query {
 - Fetch only the fields you need  
 - One single endpoint (`/graphql`)  
 - No multiple endpoints for different data  
-- More efficient and flexible
+- More efficient and flexible  
 
 ---
 
@@ -137,7 +159,7 @@ query {
 
 | Feature | REST API | GraphQL |
 |----------|-----------|-----------|
-| Endpoint | `/users/:id` | `/graphql` |
+| Endpoint | `/users/:id`, `/users/:id/basic`, `/users/:id/profile`, etc. | `/graphql` |
 | Data Control | Fixed | Customizable |
 | Over-fetching | Yes | No |
 | Multiple Endpoints | Required | Not needed |
