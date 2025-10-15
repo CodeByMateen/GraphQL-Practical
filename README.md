@@ -1,5 +1,5 @@
 
-# REST vs GraphQL Practical Example
+# REST vs GraphQL Practical Example (Why GraphQL ?)
 
 In REST APIs, if we want only **specific user fields**, we often end up creating **multiple endpoints**.  
 
