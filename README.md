@@ -3,6 +3,23 @@
 In REST APIs, if we want only **specific user fields**, we often end up creating **multiple endpoints**.  
 
 For example:  
+- We have the endpoint below to get user details,  
+  we might create:  
+  ```
+  GET /users/:id
+  ```
+### Response
+```json
+{
+  "id": 1,
+  "firstName": "Mateen",
+  "lastName": "Shahzad",
+  "email": "mateen@example.com",
+  "password": "123456",
+  "profileImage": "https://example.com/mateen.jpg"
+}
+```
+## But we want specific fields not all fields
 - If we want only the user’s **email**, **first name**, and **last name**,  
   we might create:  
   ```
