@@ -3,8 +3,7 @@
 In REST APIs, if we want only **specific user fields**, we often end up creating **multiple endpoints**.  
 
 For example:  
-- We have the endpoint below to get user details,  
-  we might create:  
+We have the endpoint below to get user details,   
   ```
   GET /users/:id
   ```
@@ -19,7 +18,10 @@ For example:
   "profileImage": "https://example.com/mateen.jpg"
 }
 ```
-## But we want specific fields not all fields
+## But we want specific fields not all fields (No OverFetching
+
+This is a simple example, in **Chatter** we have the User table with **many details** if we need specific fields, the endpoint will bring **complete detail** which is **Over Fetching**
+
 - If we want only the user’s **email**, **first name**, and **last name**,  
   we might create:  
   ```
