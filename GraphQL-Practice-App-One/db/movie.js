@@ -1,0 +1,27 @@
+const movies = [
+    { id: "1", title: "The Matrix", year: 1999, genre: "Science Fiction" },
+    { id: "2", title: "The Matrix Reloaded", year: 2003, genre: "Science Fiction" },
+    { id: "3", title: "The Matrix Revolutions", year: 2003, genre: "Science Fiction" },
+    { id: "4", title: "The Dark Knight", year: 2008, genre: "Action" },
+    { id: "5", title: "The Dark Knight Rises", year: 2012, genre: "Action" },
+    { id: "6", title: "Inception", year: 2010, genre: "Science Fiction" },
+    { id: "7", title: "Interstellar", year: 2014, genre: "Science Fiction" },
+    { id: "8", title: "The Prestige", year: 2006, genre: "Mystery" },
+    { id: "9", title: "The Shining", year: 1980, genre: "Horror" },
+    { id: "10", title: "The Silence of the Lambs", year: 1991, genre: "Thriller" },
+    { id: "11", title: "The Godfather", year: 1972, genre: "Crime" },
+    { id: "12", title: "The Godfather: Part II", year: 1974, genre: "Crime" },
+    { id: "13", title: "The Godfather: Part III", year: 1990, genre: "Crime" },
+    { id: "14", title: "The Lord of the Rings: The Fellowship of the Ring", year: 2001, genre: "Adventure" },
+    { id: "15", title: "The Lord of the Rings: The Return of the King", year: 2003, genre: "Adventure" },
+    { id: "16", title: "The Lord of the Rings: The Two Towers", year: 2002, genre: "Adventure" },
+    { id: "17", title: "The Hobbit: An Unexpected Journey", year: 2012, genre: "Adventure" },
+    { id: "18", title: "The Hobbit: The Desolation of Smaug", year: 2013, genre: "Adventure" },
+    { id: "19", title: "The Hobbit: The Battle of the Five Armies", year: 2014, genre: "Adventure" },
+    { id: "20", title: "The Avengers", year: 2012, genre: "Action" },
+    { id: "20", title: "The Avengers: Age of Ultron", year: 2015, genre: "Action" },
+    { id: "21", title: "The Avengers: Infinity War", year: 2018, genre: "Action" },
+    { id: "22", title: "The Avengers: Endgame", year: 2019, genre: "Action" },
+];
+
+module.exports = movies;
