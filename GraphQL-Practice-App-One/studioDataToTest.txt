@@ -1,0 +1,277 @@
+# ===========================================
+# QUERY EXAMPLES
+# ===========================================
+
+# Get All Users with Basic Info
+query getAllUsers {
+  users {
+    id
+    username
+    name
+    email
+    age
+    gender
+  }
+}
+
+# Get All Users with Friends and Movies
+query getUsersWithRelations {
+  users {
+    id
+    username
+    name
+    email
+    age
+    gender
+    friends {
+      id
+      name
+      username
+    }
+    favoriteMovies {
+      id
+      title
+      year
+      genre
+    }
+  }
+}
+
+# Get Single User by ID
+query getSingleUser {
+  user(id: "1") {
+    id
+    username
+    name
+    email
+    age
+    gender
+    friends {
+      id
+      name
+    }
+    favoriteMovies {
+      id
+      title
+      year
+    }
+  }
+}
+
+# Get All Movies
+query getAllMovies {
+  movies {
+    id
+    title
+    year
+    genre
+  }
+}
+
+# Get Single Movie by Title
+query getSingleMovie {
+  movie(title: "The Matrix") {
+    id
+    title
+    year
+    genre
+  }
+}
+
+# Your Original Query (only shows movie years)
+query userQuery {
+  users {
+    favoriteMovies {
+      year
+    }
+  }
+}
+
+# For mutation
+
+# Create User Mutation
+mutation createUser {
+  createUser(user: {
+    username: "john_doe"
+    name: "John Doe"
+    email: "john@example.com"
+    age: 25
+    password: "password123"
+    gender: MALE
+  }) {
+    id
+    username
+    name
+    email
+    age
+    gender
+  }
+}
+
+# ===========================================
+# DIRECT MUTATION METHOD EXAMPLES (Testing/Development Style)
+# ===========================================
+
+mutation updateUser {
+  updateUser(id: "1", user: {
+    username: "jane_updated"
+    name: "Jane Smith"
+    email: "jane@example.com"
+    age: 28
+    password: "newpassword123"
+    gender: FEMALE
+  }) {
+    id
+    username
+    name
+    email
+    age
+    gender
+  }
+}
+
+# Delete User Mutation
+mutation deleteUser {
+  deleteUser(id: "1") {
+    id
+    username
+    name
+  }
+}
+
+# Create Movie Mutation
+mutation createMovie {
+  createMovie(movie: {
+    title: "The Matrix"
+    year: 1999
+    genre: "Sci-Fi"
+  }) {
+    id
+    title
+    year
+    genre
+  }
+}
+
+# Update Movie Mutation
+mutation updateMovie {
+  updateMovie(id: "1", movie: {
+    title: "The Matrix Reloaded"
+    year: 2003
+    genre: "Sci-Fi Action"
+  }) {
+    id
+    title
+    year
+    genre
+  }
+}
+
+# Delete Movie Mutation
+mutation deleteMovie {
+  deleteMovie(id: "1") {
+    id
+    title
+    year
+  }
+}
+
+# ===========================================
+# VARIABLE MUTATION METHOD EXAMPLES (Production Style)
+# ===========================================
+
+# Create User with Variables
+mutation createUserWithVariables($user: UserInput!) {
+  createUser(user: $user) {
+    id
+    username
+    name
+    email
+    age
+    gender
+  }
+}
+
+# Variables for createUserWithVariables:
+# {
+#   "user": {
+#     "username": "alice_smith",
+#     "name": "Alice Smith",
+#     "email": "alice@example.com",
+#     "age": 26,
+#     "password": "securepass123",
+#     "gender": "FEMALE"
+#   }
+# }
+
+---------------------------
+
+# Update User with Variables
+mutation updateUserWithVariables($id: ID!, $user: UserInput!) {
+  updateUser(id: $id, user: $user) {
+    id
+    username
+    name
+    email
+    age
+    gender
+  }
+}
+
+# Variables for updateUserWithVariables:
+# {
+#   "id": "2",
+#   "user": {
+#     "username": "bob_updated",
+#     "name": "Bob Johnson",
+#     "email": "bob@example.com",
+#     "age": 30,
+#     "password": "newpassword456",
+#     "gender": "MALE"
+#   }
+# }
+
+---------------------------
+
+# Create Movie with Variables
+mutation createMovieWithVariables($movie: MovieInput!) {
+  createMovie(movie: $movie) {
+    id
+    title
+    year
+    genre
+  }
+}
+
+# Variables for createMovieWithVariables:
+# {
+#   "movie": {
+#     "title": "Inception",
+#     "year": 2010,
+#     "genre": "Sci-Fi Thriller"
+#   }
+# }
+
+---------------------------
+
+# Update Movie with Variables
+mutation updateMovieWithVariables($id: ID!, $movie: MovieInput!) {
+  updateMovie(id: $id, movie: $movie) {
+    id
+    title
+    year
+    genre
+  }
+}
+
+# Variables for updateMovieWithVariables:
+# {
+#   "id": "2",
+#   "movie": {
+#     "title": "Inception Director's Cut",
+#     "year": 2010,
+#     "genre": "Sci-Fi Thriller Drama"
+#   }
+# }
+
+---------------------------
