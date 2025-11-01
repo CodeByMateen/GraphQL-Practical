@@ -36,15 +36,19 @@ const resolvers = {
             return newUser;
         },
         updateUser: (_, { id, user }) => {
-            const updatedUser = users.find(user => user.id === id);
+            const updatedUser = users.find(u => u.id === id);
             if (!updatedUser) {
                 throw new Error('User not found');
             }
-            updatedUser.update(user);
+            Object.assign(updatedUser, user);
             return updatedUser;
         },
         deleteUser: (_, { id }) => {
-            return users.find(user => user.id === id).delete();
+            const userIndex = users.findIndex(user => user.id === id);
+            if (userIndex === -1) {
+                throw new Error('User not found');
+            }
+            return users.splice(userIndex, 1)[0];
         },
         createMovie: (_, { movie }) => {
             const newMovie = {
@@ -55,15 +59,19 @@ const resolvers = {
             return newMovie;
         },
         updateMovie: (_, { id, movie }) => {
-            const updatedMovie = movies.find(movie => movie.id === id);
+            const updatedMovie = movies.find(m => m.id === id);
             if (!updatedMovie) {
                 throw new Error('Movie not found');
             }
-            updatedMovie.update(movie);
+            Object.assign(updatedMovie, movie);
             return updatedMovie;
         },
         deleteMovie: (_, { id }) => {
-            return movies.find(movie => movie.id === id).delete();
+            const movieIndex = movies.findIndex(movie => movie.id === id);
+            if (movieIndex === -1) {
+                throw new Error('Movie not found');
+            }
+            return movies.splice(movieIndex, 1)[0];
         },
     },
 };

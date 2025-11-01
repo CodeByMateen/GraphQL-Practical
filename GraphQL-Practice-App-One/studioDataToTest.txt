@@ -206,8 +206,8 @@ mutation createUserWithVariables($user: UserInput!) {
 
 ---------------------------
 
-# Update User with Variables
-mutation updateUserWithVariables($id: ID!, $user: UserInput!) {
+# Update User with Variables (Full Update)
+mutation updateUserWithVariables($id: ID!, $user: UpdateUserInput!) {
   updateUser(id: $id, user: $user) {
     id
     username
@@ -218,7 +218,7 @@ mutation updateUserWithVariables($id: ID!, $user: UserInput!) {
   }
 }
 
-# Variables for updateUserWithVariables:
+# Variables for updateUserWithVariables (Full Update):
 # {
 #   "id": "2",
 #   "user": {
@@ -228,6 +228,26 @@ mutation updateUserWithVariables($id: ID!, $user: UserInput!) {
 #     "age": 30,
 #     "password": "newpassword456",
 #     "gender": "MALE"
+#   }
+# }
+
+# Update User with Variables (Partial Update - Only Username)
+# mutation updateUserWithVariables($id: ID!, $user: UpdateUserInput!) {
+#   updateUser(id: $id, user: $user) {
+#     id
+#     username
+#     name
+#     email
+#     age
+#     gender
+#   }
+# }
+
+# Variables for Partial Update (Only Username):
+# {
+#   "id": "2",
+#   "user": {
+#     "username": "emilydd"
 #   }
 # }
 
@@ -255,7 +275,7 @@ mutation createMovieWithVariables($movie: MovieInput!) {
 ---------------------------
 
 # Update Movie with Variables
-mutation updateMovieWithVariables($id: ID!, $movie: MovieInput!) {
+mutation updateMovieWithVariables($id: ID!, $movie: UpdateMovieInput!) {
   updateMovie(id: $id, movie: $movie) {
     id
     title
@@ -272,6 +292,41 @@ mutation updateMovieWithVariables($id: ID!, $movie: MovieInput!) {
 #     "year": 2010,
 #     "genre": "Sci-Fi Thriller Drama"
 #   }
+# }
+
+---------------------------
+
+# Delete User with Variables
+mutation deleteUserWithVariables($deleteUserId: ID!) {
+  deleteUser(id: $deleteUserId) {
+    id
+    username
+    name
+    email
+  }
+}
+
+# Variables for deleteUserWithVariables:
+# {
+#   "deleteUserId": "2"
+# }
+
+# Note: The variable name in mutation ($deleteUserId) MUST match the JSON key ("deleteUserId")
+
+---------------------------
+
+# Delete Movie with Variables
+mutation deleteMovieWithVariables($deleteMovieId: ID!) {
+  deleteMovie(id: $deleteMovieId) {
+    id
+    title
+    year
+  }
+}
+
+# Variables for deleteMovieWithVariables:
+# {
+#   "deleteMovieId": "1"
 # }
 
 ---------------------------
