@@ -7,19 +7,6 @@ export const GET_USERS = gql`
       username
       name
       email
-      age
-      gender
-      friends {
-        id
-        username
-        name
-      }
-      favoriteMovies {
-        id
-        title
-        year
-        genre
-      }
     }
   }
 `;
@@ -31,41 +18,40 @@ export const GET_USER = gql`
       username
       name
       email
-      age
-      gender
-      friends {
+    }
+  }
+`;
+
+export const GET_TASKS = gql`
+  query GetTasks {
+    tasks {
+      id
+      title
+      description
+      completed
+      user {
         id
         username
         name
+        email
       }
-      favoriteMovies {
+    }
+  }
+`;
+
+export const GET_TASK = gql`
+  query GetTask($id: ID!) {
+    task(id: $id) {
+      id
+      title
+      description
+      completed
+      user {
         id
-        title
-        year
-        genre
+        username
+        name
+        email
       }
-    }
-  }
-`;
-
-export const GET_MOVIES = gql`
-  query GetMovies {
-    movies {
-      id
-      title
-      year
-      genre
-    }
-  }
-`;
-
-export const GET_MOVIE = gql`
-  query GetMovie($title: String!) {
-    movie(title: $title) {
-      id
-      title
-      year
-      genre
     }
   }
 `;

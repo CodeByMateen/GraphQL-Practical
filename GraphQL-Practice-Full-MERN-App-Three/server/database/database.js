@@ -1,12 +1,14 @@
 import mongoose from "mongoose";
 
-const connectDB = async () => {
-        await mongoose.connect(process.env.MONGODB_URI).then(() => {
-            console.log("Connected to MongoDB");
-        }).catch((error) => {
-            console.error("Error connecting to MongoDB:", error);
-            process.exit(1);
-        });
+export const connectToDatabase = () => {
+    mongoose
+    .connect(process.env.MONGODB_URI, {
+      dbName: "TaskManagerGraphQLDB",
+    })
+    .then(() => {
+      console.log("Connected to Database");
+    })
+    .catch((err) => {
+      console.log(`An error occurred while connection to database: ${err}`);
+    });
 };
-
-export default connectDB;

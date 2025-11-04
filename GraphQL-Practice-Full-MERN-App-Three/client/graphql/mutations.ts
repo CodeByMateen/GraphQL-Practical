@@ -1,27 +1,33 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_USER = gql`
-  mutation CreateUser($user: UserInput!) {
-    createUser(user: $user) {
+  mutation CreateUser($username: String!, $name: String!, $email: String!, $password: String!) {
+    createUser(
+      username: $username
+      name: $name
+      email: $email
+      password: $password
+    ) {
       id
       username
       name
       email
-      age
-      gender
     }
   }
 `;
 
 export const UPDATE_USER = gql`
-  mutation UpdateUser($id: ID!, $user: UpdateUserInput!) {
-    updateUser(id: $id, user: $user) {
+  mutation UpdateUser($id: ID!, $username: String, $name: String, $email: String) {
+    updateUser(
+      id: $id
+      username: $username
+      name: $name
+      email: $email
+    ) {
       id
       username
       name
       email
-      age
-      gender
     }
   }
 `;
@@ -36,33 +42,52 @@ export const DELETE_USER = gql`
   }
 `;
 
-export const CREATE_MOVIE = gql`
-  mutation CreateMovie($movie: MovieInput!) {
-    createMovie(movie: $movie) {
+export const CREATE_TASK = gql`
+  mutation CreateTask($title: String!, $description: String!, $userId: ID!) {
+    createTask(
+      title: $title
+      description: $description
+      userId: $userId
+    ) {
       id
       title
-      year
-      genre
+      description
+      completed
+      user {
+        id
+        username
+        name
+      }
     }
   }
 `;
 
-export const UPDATE_MOVIE = gql`
-  mutation UpdateMovie($id: ID!, $movie: UpdateMovieInput!) {
-    updateMovie(id: $id, movie: $movie) {
+export const UPDATE_TASK = gql`
+  mutation UpdateTask($id: ID!, $title: String, $description: String, $completed: Boolean) {
+    updateTask(
+      id: $id
+      title: $title
+      description: $description
+      completed: $completed
+    ) {
       id
       title
-      year
-      genre
+      description
+      completed
+      user {
+        id
+        username
+      }
     }
   }
 `;
 
-export const DELETE_MOVIE = gql`
-  mutation DeleteMovie($id: ID!) {
-    deleteMovie(id: $id) {
+export const DELETE_TASK = gql`
+  mutation DeleteTask($id: ID!) {
+    deleteTask(id: $id) {
       id
       title
+      description
     }
   }
 `;

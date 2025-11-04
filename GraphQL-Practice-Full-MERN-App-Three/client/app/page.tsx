@@ -1,5 +1,5 @@
 import { Users } from '../components/Users';
-import { Movies } from '../components/Movies';
+import { Tasks } from '../components/Tasks';
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
             <Users />
           </div>
           <div>
-            <Movies />
+            <Tasks />
           </div>
         </div>
       </main>

@@ -1,0 +1,333 @@
+# ===========================================
+# QUERY EXAMPLES
+# ===========================================
+
+# Get All Users
+query getAllUsers {
+  users {
+    id
+    username
+    name
+    email
+  }
+}
+
+# Get Single User by ID
+query getSingleUser {
+  user(id: "1") {
+    id
+    username
+    name
+    email
+  }
+}
+
+# Get All Tasks
+query getAllTasks {
+  tasks {
+    id
+    title
+    description
+    completed
+    user {
+      id
+      username
+      name
+      email
+    }
+  }
+}
+
+# Get Single Task by ID
+query getSingleTask {
+  task(id: "1") {
+    id
+    title
+    description
+    completed
+    user {
+      id
+      username
+      name
+      email
+    }
+  }
+}
+
+# Get Tasks with User Info Only
+query getTasksWithUser {
+  tasks {
+    id
+    title
+    completed
+    user {
+      username
+      name
+    }
+  }
+}
+
+# ===========================================
+# DIRECT MUTATION METHOD EXAMPLES (Testing/Development Style)
+# ===========================================
+
+# Create User Mutation
+mutation createUser {
+  createUser(
+    username: "john_doe"
+    name: "John Doe"
+    email: "john@example.com"
+    password: "password123"
+  ) {
+    id
+    username
+    name
+    email
+  }
+}
+
+# Update User Mutation
+mutation updateUser {
+  updateUser(
+    id: "1"
+    username: "jane_updated"
+    name: "Jane Smith"
+    email: "jane@example.com"
+  ) {
+    id
+    username
+    name
+    email
+  }
+}
+
+# Delete User Mutation
+mutation deleteUser {
+  deleteUser(id: "1") {
+    id
+    username
+    name
+    email
+  }
+}
+
+# Create Task Mutation
+mutation createTask {
+  createTask(
+    title: "Complete GraphQL Project"
+    description: "Finish implementing all GraphQL endpoints"
+    userId: "1"
+  ) {
+    id
+    title
+    description
+    completed
+    user {
+      id
+      username
+      name
+    }
+  }
+}
+
+# Update Task Mutation
+mutation updateTask {
+  updateTask(
+    id: "1"
+    title: "Updated Task Title"
+    description: "Updated description"
+    completed: true
+  ) {
+    id
+    title
+    description
+    completed
+    user {
+      id
+      username
+    }
+  }
+}
+
+# Delete Task Mutation
+mutation deleteTask {
+  deleteTask(id: "1") {
+    id
+    title
+    description
+  }
+}
+
+# ===========================================
+# VARIABLE MUTATION METHOD EXAMPLES (Production Style)
+# ===========================================
+
+# Create User with Variables
+mutation createUserWithVariables($username: String!, $name: String!, $email: String!, $password: String!) {
+  createUser(
+    username: $username
+    name: $name
+    email: $email
+    password: $password
+  ) {
+    id
+    username
+    name
+    email
+  }
+}
+
+# Variables for createUserWithVariables:
+# {
+#   "username": "alice_smith",
+#   "name": "Alice Smith",
+#   "email": "alice@example.com",
+#   "password": "securepass123"
+# }
+
+---------------------------
+
+# Update User with Variables (Full Update)
+mutation updateUserWithVariables($id: ID!, $username: String, $name: String, $email: String) {
+  updateUser(
+    id: $id
+    username: $username
+    name: $name
+    email: $email
+  ) {
+    id
+    username
+    name
+    email
+  }
+}
+
+# Variables for updateUserWithVariables (Full Update):
+# {
+#   "id": "2",
+#   "username": "bob_updated",
+#   "name": "Bob Johnson",
+#   "email": "bob@example.com"
+# }
+
+# Update User with Variables (Partial Update - Only Username)
+# mutation updateUserWithVariables($id: ID!, $username: String) {
+#   updateUser(
+#     id: $id
+#     username: $username
+#   ) {
+#     id
+#     username
+#     name
+#     email
+#   }
+# }
+
+# Variables for Partial Update (Only Username):
+# {
+#   "id": "2",
+#   "username": "emily_doe"
+# }
+
+---------------------------
+
+# Create Task with Variables
+mutation createTaskWithVariables($title: String!, $description: String!, $userId: ID!) {
+  createTask(
+    title: $title
+    description: $description
+    userId: $userId
+  ) {
+    id
+    title
+    description
+    completed
+    user {
+      id
+      username
+      name
+    }
+  }
+}
+
+# Variables for createTaskWithVariables:
+# {
+#   "title": "Learn GraphQL",
+#   "description": "Master GraphQL queries and mutations",
+#   "userId": "1"
+# }
+
+---------------------------
+
+# Update Task with Variables
+mutation updateTaskWithVariables($id: ID!, $title: String, $description: String, $completed: Boolean) {
+  updateTask(
+    id: $id
+    title: $title
+    description: $description
+    completed: $completed
+  ) {
+    id
+    title
+    description
+    completed
+    user {
+      id
+      username
+    }
+  }
+}
+
+# Variables for updateTaskWithVariables (Full Update):
+# {
+#   "id": "2",
+#   "title": "Updated Task Title",
+#   "description": "Updated task description",
+#   "completed": true
+# }
+
+# Variables for Partial Update (Only Mark as Completed):
+# {
+#   "id": "2",
+#   "completed": true
+# }
+
+---------------------------
+
+# Delete User with Variables
+mutation deleteUserWithVariables($deleteUserId: ID!) {
+  deleteUser(id: $deleteUserId) {
+    id
+    username
+    name
+    email
+  }
+}
+
+# Variables for deleteUserWithVariables:
+# {
+#   "deleteUserId": "2"
+# }
+
+# Note: The variable name in mutation ($deleteUserId) MUST match the JSON key ("deleteUserId")
+
+---------------------------
+
+# Delete Task with Variables
+mutation deleteTaskWithVariables($deleteTaskId: ID!) {
+  deleteTask(id: $deleteTaskId) {
+    id
+    title
+    description
+  }
+}
+
+# Variables for deleteTaskWithVariables:
+# {
+#   "deleteTaskId": "1"
+# }
+
+# Note: The variable name in mutation ($deleteTaskId) MUST match the JSON key ("deleteTaskId")
+
+---------------------------
+

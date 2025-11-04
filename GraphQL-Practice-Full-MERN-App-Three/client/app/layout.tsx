@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "GraphQL Practice App",
-  description: "GraphQL Practice App with Users and Movies",
+  description: "GraphQL Practice App with Users and Tasks",
 };
 
 export default function RootLayout({

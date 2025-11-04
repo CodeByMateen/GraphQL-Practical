@@ -15,9 +15,7 @@ export function Users() {
     username: '',
     name: '',
     email: '',
-    age: '',
     password: '',
-    gender: 'OTHER',
   });
   const [editingId, setEditingId] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -101,32 +99,23 @@ export function Users() {
         await updateUser({
           variables: {
             id: editingId,
-            user: {
-              username: formData.username,
-              name: formData.name,
-              email: formData.email,
-              age: formData.age ? parseInt(formData.age) : undefined,
-              password: formData.password || undefined,
-              gender: formData.gender,
-            },
+            username: formData.username || undefined,
+            name: formData.name || undefined,
+            email: formData.email || undefined,
           },
         });
         setEditingId(null);
       } else {
         await createUser({
           variables: {
-            user: {
-              username: formData.username,
-              name: formData.name,
-              email: formData.email,
-              age: formData.age ? parseInt(formData.age) : 0,
-              password: formData.password,
-              gender: formData.gender,
-            },
+            username: formData.username,
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
           },
         });
       }
-      setFormData({ username: '', name: '', email: '', age: '', password: '', gender: 'OTHER' });
+      setFormData({ username: '', name: '', email: '', password: '' });
     } catch (err) {
       console.error('Error:', err);
     }
@@ -138,9 +127,7 @@ export function Users() {
       username: user.username,
       name: user.name,
       email: user.email,
-      age: user.age?.toString() || '',
       password: '',
-      gender: user.gender || 'OTHER',
     });
   };
 
@@ -225,7 +212,7 @@ export function Users() {
             placeholder="Username"
             value={formData.username}
             onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-            className="px-3 py-2 border border-gray-300 rounded text-gray-900"
+            className="px-3 py-2 border border-gray-300 rounded text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             required
           />
           <input
@@ -233,7 +220,7 @@ export function Users() {
             placeholder="Name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="px-3 py-2 border border-gray-300 rounded text-gray-900"
+            className="px-3 py-2 border border-gray-300 rounded text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             required
           />
           <input
@@ -241,33 +228,18 @@ export function Users() {
             placeholder="Email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="px-3 py-2 border border-gray-300 rounded text-gray-900"
+            className="px-3 py-2 border border-gray-300 rounded text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             required
           />
-          <input
-            type="number"
-            placeholder="Age"
-            value={formData.age}
-            onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-            className="px-3 py-2 border border-gray-300 rounded text-gray-900"
-          />
+
           <input
             type="password"
             placeholder={editingId ? 'Password (leave blank to keep)' : 'Password'}
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-            className="px-3 py-2 border border-gray-300 rounded text-gray-900"
+            className="px-3 py-2 border border-gray-300 rounded text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             required={!editingId}
           />
-          <select
-            value={formData.gender}
-            onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-            className="px-3 py-2 border border-gray-300 rounded text-gray-900"
-          >
-            <option value="MALE">Male</option>
-            <option value="FEMALE">Female</option>
-            <option value="OTHER">Other</option>
-          </select>
         </div>
         <div className="flex gap-2">
           <button
@@ -281,7 +253,7 @@ export function Users() {
               type="button"
               onClick={() => {
                 setEditingId(null);
-                setFormData({ username: '', name: '', email: '', age: '', password: '', gender: 'OTHER' });
+                setFormData({ username: '', name: '', email: '', password: '' });
               }}
               className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"
             >
@@ -303,16 +275,6 @@ export function Users() {
               <div>
                 <h3 className="font-semibold text-gray-800">{user.name} (@{user.username})</h3>
                 <p className="text-sm text-gray-600">{user.email}</p>
-                {user.age && <p className="text-sm text-gray-600">Age: {user.age}</p>}
-                {user.gender && <p className="text-sm text-gray-600">Gender: {user.gender}</p>}
-                {user.friends?.length > 0 && (
-                  <p className="text-sm text-gray-600">Friends: {user.friends.map((f: any) => f.name).join(', ')}</p>
-                )}
-                {user.favoriteMovies?.length > 0 && (
-                  <p className="text-sm text-gray-600">
-                    Favorite Movies: {user.favoriteMovies.map((m: any) => m.title).join(', ')}
-                  </p>
-                )}
               </div>
               <div className="flex gap-2">
                 <button
